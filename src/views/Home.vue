@@ -1,6 +1,12 @@
 <template>
   <div class="home">
-    <van-button type="primary">主要按钮</van-button>
+    <van-search
+      v-model="searchValue"
+      shape="round"
+      placeholder="请输入搜索关键词"
+      disabled
+    />
+    <p>这是p</p>
   </div>
 </template>
 
@@ -10,6 +16,11 @@
 
 export default {
   name: "Home",
+  data() {
+    return {
+      searchValue: ""
+    };
+  },
   components: {}
 };
 </script>
