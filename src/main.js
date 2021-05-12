@@ -4,6 +4,7 @@ import App from "./App.vue";
 import router from "./router";
 import "reset-css";
 import "@/vantui";
+
 Vue.config.productionTip = false;
 
 new Vue({

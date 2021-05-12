@@ -1,3 +1,3 @@
 import request from "./request";
 //home page request
-export const GetHomeList = () => request.get("/index/index");
+export const GetHomeData = () => request.get("/index/index");

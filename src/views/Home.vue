@@ -6,7 +6,11 @@
       placeholder="请输入搜索关键词"
       disabled
     />
-    <p>这是p</p>
+    <van-swipe class="my-swipe" :autoplay="3000" indicator-color="lightblue">
+      <van-swipe-item v-for="item in banner" :key="item.id"
+        ><img :src="item.image_url" width="100%" alt=""
+      /></van-swipe-item>
+    </van-swipe>
   </div>
 </template>
 
@@ -15,25 +19,25 @@
 //import HelloWorld from '@/components/HelloWorld.vue'
 //import axios from "axios";
 import request from "@/request/request";
-import { GetHomeList } from "@/request/api";
+import { GetHomeData } from "@/request/api";
 export default {
   name: "Home",
   data() {
     return {
-      searchValue: ""
+      searchValue: "",
+      banner: []
     };
   },
   //get data
   created() {
     //request
     // .get("/index/index")
-    GetHomeList()
+    GetHomeData()
       .then(res => {
-        console.log("success!!123");
-        console.log(res);
+        console.log("---------then中res是:", res.data.banner);
+        this.banner = res.data.banner;
       })
       .catch(err => {
-        console.log("error");
         console.log(err);
       });
   },
