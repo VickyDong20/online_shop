@@ -2,6 +2,7 @@
   <div class="home">
     <van-search
       v-model="searchValue"
+      @click="$router.push('/home/seachPopup')"
       shape="round"
       placeholder="请输入搜索关键词"
       disabled
@@ -11,6 +12,7 @@
         ><img :src="item.image_url" width="100%" alt=""
       /></van-swipe-item>
     </van-swipe>
+    <router-view></router-view>
   </div>
 </template>
 

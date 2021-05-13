@@ -1,6 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
+import SearchPopup from "../views/SearchPopup.vue";
 
 Vue.use(VueRouter);
 
@@ -12,8 +13,18 @@ const routes = [
   {
     path: "/home",
     name: "Home",
-    component: Home
+    component: Home,
+    children: [
+      {
+        path: "/home/seachPopup",
+        name: "SearchPopup",
+        component: () =>
+          import(/* webpackChunkName: "about" */ "../views/SearchPopup.vue")
+      }
+    ]
   }
+  //{
+
   //{
   // path: '/about',
   // name: 'About',
