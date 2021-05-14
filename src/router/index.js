@@ -1,8 +1,11 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
-import SearchPopup from "../views/SearchPopup.vue";
 
+const originalPush = VueRouter.prototype.push;
+VueRouter.prototype.push = function(location) {
+  return originalPush.call(this, location).catch(err => {});
+};
 Vue.use(VueRouter);
 
 const routes = [

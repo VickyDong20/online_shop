@@ -10,10 +10,12 @@
   },
   "dependencies": {
     "@request/api": "^0.6.0",
+    "@vue/compiler-sfc": "^3.0.11",
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "less": "^3.9.0",
     "less-loader": "^5.0.0",
+    "node-sass": "^6.0.0",
     "reset-css": "^5.0.1",
     "vant": "^2.12.18",
     "vue": "^2.6.11",
