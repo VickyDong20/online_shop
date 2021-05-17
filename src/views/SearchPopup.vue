@@ -7,16 +7,38 @@
       @search="onSearch"
       @cancel="onCancel"
     />
+    <History-hot v-if="blockShow == 1" :historyListData="historyListData" />
+    <!--<comp1 v-if="blockShow == 1"> </comp1>
+    <comp2 v-else-if="blockShow == 2"> </comp2>
+    <comp3 v-else="blockShow == 3"> </comp3>-->
   </div>
 </template>
 
 <script>
+import HistoryHot from "@/components/HistoryHot";
+import { GetSearchPopupData } from "@/request/api";
 export default {
   data() {
     return {
+      //the search words, user entered
       searchValue: "",
-      placeholderValue: ""
+      //placeholder
+      placeholderValue: "",
+      //bolockshow value can be 1,2,3
+      // 1 means display the search history and the hot search
+      //2 means display the search list
+      //3 menas display the search result
+      blockShow: 1,
+      //history search data
+      historyListData: []
     };
+  },
+  created() {
+    GetSearchPopupData().then(res => {
+      console.log(res.data),
+        (this.placeholderValue = res.data.defaultKeyword.keyword);
+      this.historyListData = res.data.historyKeywordList;
+    });
   },
   methods: {
     onSearch(val) {},
@@ -24,6 +46,9 @@ export default {
       // this.$router.push("/home");
       this.$router.go(-1); //back to the upper page
     }
+  },
+  components: {
+    HistoryHot
   }
 };
 </script>
@@ -34,6 +59,6 @@ export default {
   position: absolute;
 
   top: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: lightgrey;
 }
 </style>
