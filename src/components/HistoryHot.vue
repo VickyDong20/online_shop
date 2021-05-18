@@ -19,13 +19,15 @@
     <div class="search-hot">
       <div class="search-header">
         <h3>Hot search</h3>
-        <van-icon name="delete-o" />
       </div>
       <div class="search-bottom">
-        <van-tag plain type="default">tag</van-tag>
-        <van-tag plain type="default">tag</van-tag>
-        <van-tag plain type="default">tag</van-tag>
-        <van-tag plain type="default">tag</van-tag>
+        <van-tag
+          v-for="(item, index) in hotKeywordListData"
+          :key="index"
+          plain
+          type="default"
+          >{{ item.keyword }}</van-tag
+        >
       </div>
     </div>
   </div>
@@ -36,7 +38,7 @@ export default {
   data() {
     return {};
   },
-  props: ["historyListData"]
+  props: ["historyListData", "hotKeywordListData"]
 };
 </script>
 

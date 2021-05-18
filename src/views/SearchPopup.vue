@@ -7,7 +7,11 @@
       @search="onSearch"
       @cancel="onCancel"
     />
-    <History-hot v-if="blockShow == 1" :historyListData="historyListData" />
+    <History-hot
+      v-if="blockShow == 1"
+      :historyListData="historyListData"
+      :hotKeywordListData="hotKeywordListData"
+    />
     <!--<comp1 v-if="blockShow == 1"> </comp1>
     <comp2 v-else-if="blockShow == 2"> </comp2>
     <comp3 v-else="blockShow == 3"> </comp3>-->
@@ -30,7 +34,8 @@ export default {
       //3 menas display the search result
       blockShow: 1,
       //history search data
-      historyListData: []
+      historyListData: [],
+      hotKeywordListData: []
     };
   },
   created() {
@@ -38,6 +43,7 @@ export default {
       console.log(res.data),
         (this.placeholderValue = res.data.defaultKeyword.keyword);
       this.historyListData = res.data.historyKeywordList;
+      this.hotKeywordListData = res.data.hotKeywordList;
     });
   },
   methods: {
