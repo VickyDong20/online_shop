@@ -26,6 +26,7 @@
           :key="index"
           plain
           type="default"
+          :class="item.is_hot ? 'red' : ''"
           >{{ item.keyword }}</van-tag
         >
       </div>
@@ -62,6 +63,9 @@ export default {
   .van-tag {
     margin-right: 0.05rem;
     padding: 0.02rem 0.02rem 0.02rem 0.02rem;
+  }
+  .red {
+    color: red;
   }
 }
 .history-bottom,

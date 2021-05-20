@@ -6,11 +6,16 @@
       :placeholder="placeholderValue"
       @search="onSearch"
       @cancel="onCancel"
+      @input="onInput"
     />
     <History-hot
       v-if="blockShow == 1"
       :historyListData="historyListData"
       :hotKeywordListData="hotKeywordListData"
+    />
+    <SearchTipList
+      v-else-if="blockShow == 2"
+      :searchTipsListData="searchTipsListData"
     />
     <!--<comp1 v-if="blockShow == 1"> </comp1>
     <comp2 v-else-if="blockShow == 2"> </comp2>
@@ -20,7 +25,9 @@
 
 <script>
 import HistoryHot from "@/components/HistoryHot";
-import { GetSearchPopupData } from "@/request/api";
+import SearchTipList from "@/components/SearchTipList";
+import { GetSearchPopupData, GetSearchTipsListData } from "@/request/api";
+
 export default {
   data() {
     return {
@@ -35,13 +42,14 @@ export default {
       blockShow: 1,
       //history search data
       historyListData: [],
-      hotKeywordListData: []
+      hotKeywordListData: [],
+      searchTipsListData: []
     };
   },
   created() {
     GetSearchPopupData().then(res => {
-      console.log(res.data),
-        (this.placeholderValue = res.data.defaultKeyword.keyword);
+      //console.log(res.data),
+      this.placeholderValue = res.data.defaultKeyword.keyword;
       this.historyListData = res.data.historyKeywordList;
       this.hotKeywordListData = res.data.hotKeywordList;
     });
@@ -51,10 +59,20 @@ export default {
     onCancel() {
       // this.$router.push("/home");
       this.$router.go(-1); //back to the upper page
+    },
+    onInput(val) {
+      console.log(val);
+      this.blockShow = 2;
+      //send request and get the tiplist
+      GetSearchTipsListData({ keyword: val }).then(res => {
+        console.log(res);
+        this.searchTipsListData = res.data;
+      });
     }
   },
   components: {
-    HistoryHot
+    HistoryHot,
+    SearchTipList
   }
 };
 </script>

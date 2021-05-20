@@ -10,7 +10,7 @@ instance.interceptors.request.use(
   config => {
     //excute before the send request
     //to see whether the user login, if not, return. the request won't be sent. config is the information of this request
-    console.log("config", config);
+    // console.log("config", config);
     return config;
   },
   err => {
